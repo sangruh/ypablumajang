@@ -1,0 +1,56 @@
+# Cache & Sessions
+application/cache/sessions/*
+!application/cache/sessions/.gitkeep
+application/logs/*
+!application/logs/.gitkeep
+
+# System & vendor
+system/
+vendor/
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.sublime-*
+
+# Uploads (user generated)
+assets/uploads/
+
+# Backup & temp files
+*.zip
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# Test scripts
+check_pengiriman_table.php
+test_db.php
+application/test_db.php
+
+# Old config examples
+application/config/*.example
+
+# Nginx config (Plesk specific)
+nginx.conf
+
+# Default CI3 files we don't need
+application/controllers/Welcome.php
+application/views/welcome_message.php
+application/views/index.html
+application/controllers/index.html
+application/core/index.html
+application/helpers/index.html
+application/hooks/index.html
+application/language/index.html
+application/language/english/index.html
+application/libraries/index.html
+application/models/index.html
+application/third_party/index.html
+application/config/index.html
+application/.htaccess
