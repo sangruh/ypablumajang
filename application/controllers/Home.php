@@ -3,9 +3,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home extends CI_Controller {
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model(['berita_model', 'artikel_model', 'publikasi_model', 'kegiatan_model']);
+    }
+
     public function index()
     {
-        $this->load->view('home/layout', array('page_title' => 'YPAB Kabupaten Lumajang - Beranda', 'content' => $this->load->view('home/index', '', true)));
+        $data['berita_terbaru'] = $this->berita_model->get_published(3);
+        $data['kegiatan_mendatang'] = $this->kegiatan_model->get_upcoming(3);
+        $data['artikel_terbaru'] = $this->artikel_model->get_published(3);
+
+        $this->load->view('home/layout', array(
+            'page_title' => 'YPAB Kabupaten Lumajang - Beranda',
+            'content' => $this->load->view('home/index', $data, true)
+        ));
     }
 
     public function tentang()
@@ -22,117 +35,69 @@ class Home extends CI_Controller {
     public function program()
     {
         $data['programs'] = array(
-            array(
-                'nama' => 'Pendampingan Anak Asuh',
-                'deskripsi' => 'Memberikan pendampingan dan pembinaan kepada anak-anak asuh agar mendapat kehidupan yang layak.',
-                'icon' => '👨‍👩‍👧‍👦'
-            ),
-            array(
-                'nama' => 'Beasiswa Pendidikan',
-                'deskripsi' => 'Menyalurkan bantuan beasiswa bagi anak-anak kurang mampu untuk melanjutkan pendidikan.',
-                'icon' => '📚'
-            ),
-            array(
-                'nama' => 'Bantuan Sosial',
-                'deskripsi' => 'Menyalurkan bantuan sosial kepada masyarakat yang membutuhkan melalui program yang terstruktur.',
-                'icon' => '🤝'
-            ),
-            array(
-                'nama' => 'Pemberdayaan Masyarakat',
-                'deskripsi' => 'Program pemberdayaan masyarakat untuk meningkatkan kemandirian ekonomi dan sosial.',
-                'icon' => '💪'
-            ),
-            array(
-                'nama' => 'Kesehatan & Gizi',
-                'deskripsi' => 'Program peningkatan kesehatan dan gizi anak melalui pemeriksaan rutin dan pemberian makanan bergizi.',
-                'icon' => '🏥'
-            ),
-            array(
-                'nama' => 'Pelatihan Keterampilan',
-                'deskripsi' => 'Pelatihan keterampilan bagi anak asuh dan keluarga untuk meningkatkan kapasitas diri.',
-                'icon' => '🛠️'
-            )
+            array('nama' => 'Pendampingan Anak Asuh', 'deskripsi' => 'Memberikan pendampingan dan pembinaan kepada anak-anak asuh agar mendapat kehidupan yang layak.', 'icon' => '👨‍👩‍👧‍👦'),
+            array('nama' => 'Beasiswa Pendidikan', 'deskripsi' => 'Menyalurkan bantuan beasiswa bagi anak-anak kurang mampu untuk melanjutkan pendidikan.', 'icon' => '📚'),
+            array('nama' => 'Bantuan Sosial', 'deskripsi' => 'Menyalurkan bantuan sosial kepada masyarakat yang membutuhkan melalui program yang terstruktur.', 'icon' => '🤝'),
+            array('nama' => 'Pemberdayaan Masyarakat', 'deskripsi' => 'Program pemberdayaan masyarakat untuk meningkatkan kemandirian ekonomi dan sosial.', 'icon' => '💪'),
+            array('nama' => 'Kesehatan & Gizi', 'deskripsi' => 'Program peningkatan kesehatan dan gizi anak melalui pemeriksaan rutin dan pemberian makanan bergizi.', 'icon' => '🏥'),
+            array('nama' => 'Pelatihan Keterampilan', 'deskripsi' => 'Pelatihan keterampilan bagi anak asuh dan keluarga untuk meningkatkan kapasitas diri.', 'icon' => '🛠️')
         );
         $this->load->view('home/layout', array('page_title' => 'Program Kami - YPAB Kabupaten Lumajang', 'content' => $this->load->view('home/program', $data, true)));
     }
 
-    public function berita($offset = 0)
+    public function berita()
     {
-        $limit = 6;
-        // Placeholder data - nanti bisa diganti dengan query database
-        $data['berita'] = array(
-            array(
-                'judul' => 'Pelantikan Pengurus YPAB Masa Bhakti 2025-2030',
-                'tanggal' => '2026-01-15',
-                'ringkasan' => 'Pengurus Yayasan Peduli Anak Bangsa Kabupaten Lumajang resmi dilantik untuk masa bhakti 2025-2030.',
-                'gambar' => ''
-            ),
-            array(
-                'judul' => 'Penyaluran Bantuan Sosial Tahap I Tahun 2026',
-                'tanggal' => '2026-01-10',
-                'ringkasan' => 'Yayasan menyalurkan bantuan sosial tahap pertama kepada 100 penerima manfaat di Kabupaten Lumajang.',
-                'gambar' => ''
-            ),
-            array(
-                'judul' => 'Rapat Koordinasi Program Kerja 2026',
-                'tanggal' => '2026-01-05',
-                'ringkasan' => 'Pengurus YPAB menggelar rapat koordinasi untuk menyusun program kerja tahun 2026.',
-                'gambar' => ''
-            )
-        );
-        $data['total'] = count($data['berita']);
+        $data['berita'] = $this->berita_model->get_published(10);
+        $data['total'] = $this->berita_model->count_by_status('publish');
         $this->load->view('home/layout', array('page_title' => 'Berita - YPAB Kabupaten Lumajang', 'content' => $this->load->view('home/berita', $data, true)));
+    }
+
+    public function detail_berita($id)
+    {
+        $data['berita'] = $this->berita_model->get_by_id($id);
+        if (!$data['berita'] || $data['berita']->status != 'publish') {
+            show_404();
+        }
+        $this->berita_model->update($id, array('dilihat' => $data['berita']->dilihat + 1));
+        $data['berita_lain'] = $this->berita_model->get_published(3);
+        $this->load->view('home/layout', array('page_title' => $data['berita']->judul . ' - YPAB Kabupaten Lumajang', 'content' => $this->load->view('home/detail_berita', $data, true)));
     }
 
     public function artikel()
     {
-        // Placeholder data - nanti bisa diganti dengan query database
-        $data['artikel'] = array(
-            array(
-                'judul' => 'Pentingnya Pendidikan Karakter bagi Anak Asuh',
-                'penulis' => 'Dwi Sriyantini',
-                'tanggal' => '2026-01-12',
-                'ringkasan' => 'Pendidikan karakter menjadi fondasi penting dalam membentuk kepribadian anak asuh yang tangguh dan berakhlak mulia.'
-            ),
-            array(
-                'judul' => 'Peran Yayasan dalam Mewujudkan Kesejahteraan Anak',
-                'penulis' => 'Rachmaniah',
-                'tanggal' => '2026-01-08',
-                'ringkasan' => 'Yayasan memiliki peran strategis dalam menjembatani donatur dengan anak-anak yang membutuhkan bantuan.'
-            ),
-            array(
-                'judul' => 'Strategi Penggalian Dana untuk Program Sosial',
-                'penulis' => 'Yuni Irwanto',
-                'tanggal' => '2025-12-20',
-                'ringkasan' => 'Berbagai strategi penggalian dana yang dapat diterapkan oleh yayasan sosial untuk keberlangsungan program.'
-            )
-        );
+        $data['artikel'] = $this->artikel_model->get_published(10);
         $this->load->view('home/layout', array('page_title' => 'Artikel - YPAB Kabupaten Lumajang', 'content' => $this->load->view('home/artikel', $data, true)));
+    }
+
+    public function detail_artikel($id)
+    {
+        $data['artikel'] = $this->artikel_model->get_by_id($id);
+        if (!$data['artikel'] || $data['artikel']->status != 'publish') {
+            show_404();
+        }
+        $data['artikel_lain'] = $this->artikel_model->get_published(3);
+        $this->load->view('home/layout', array('page_title' => $data['artikel']->judul . ' - YPAB Kabupaten Lumajang', 'content' => $this->load->view('home/detail_artikel', $data, true)));
+    }
+
+    public function kegiatan()
+    {
+        $data['kegiatan'] = $this->kegiatan_model->get_all_kegiatan(20);
+        $this->load->view('home/layout', array('page_title' => 'Kegiatan - YPAB Kabupaten Lumajang', 'content' => $this->load->view('home/kegiatan', $data, true)));
+    }
+
+    public function detail_kegiatan($id)
+    {
+        $data['kegiatan'] = $this->kegiatan_model->get_by_id($id);
+        if (!$data['kegiatan']) {
+            show_404();
+        }
+        $data['kegiatan_lain'] = $this->kegiatan_model->get_upcoming(3);
+        $this->load->view('home/layout', array('page_title' => $data['kegiatan']->judul . ' - YPAB Kabupaten Lumajang', 'content' => $this->load->view('home/detail_kegiatan', $data, true)));
     }
 
     public function publikasi()
     {
-        // Placeholder data - nanti bisa diganti dengan query database
-        $data['publikasi'] = array(
-            array(
-                'judul' => 'Laporan Tahunan YPAB 2025',
-                'jenis' => 'Laporan Tahunan',
-                'tanggal' => '2025-12-31',
-                'file' => ''
-            ),
-            array(
-                'judul' => 'SK Pengurus Masa Bhakti 2025-2030',
-                'jenis' => 'Surat Keputusan',
-                'tanggal' => '2026-01-01',
-                'file' => ''
-            ),
-            array(
-                'judul' => 'Pedoman Pengelolaan Bantuan Sosial',
-                'jenis' => 'Pedoman',
-                'tanggal' => '2025-11-15',
-                'file' => ''
-            )
-        );
+        $data['publikasi'] = $this->publikasi_model->get_all(10);
         $this->load->view('home/layout', array('page_title' => 'Publikasi - YPAB Kabupaten Lumajang', 'content' => $this->load->view('home/publikasi', $data, true)));
     }
 
@@ -149,35 +114,16 @@ class Home extends CI_Controller {
     public function kepengurusan()
     {
         $data['pengurus'] = array(
-            'pembina' => array(
-                'ketua' => 'Ir. Indah Amperawati, M.Si.',
-                'anggota' => array('Bambang Hidayat', 'Nugroho Dwi Atmoko')
-            ),
-            'pengawas' => array(
-                'ketua' => 'Aan Dityatama',
-                'anggota' => array()
-            ),
+            'pembina' => array('ketua' => 'Ir. Indah Amperawati, M.Si.', 'anggota' => array('Bambang Hidayat', 'Nugroho Dwi Atmoko')),
+            'pengawas' => array('ketua' => 'Aan Dityatama', 'anggota' => array()),
             'pengurus_harian' => array(
-                'ketua' => 'Rachmaniah',
-                'wakil_ketua' => 'M. Nur Sjahid',
-                'sekretaris_umum' => 'Dwi Sriyantini',
-                'sekretaris_1' => 'Gatot Suprabowo',
-                'bendahara_umum' => 'Dinuk Iswahyuningsih',
-                'bendahara_1' => 'Eko Yudiantoro Ilyas'
+                'ketua' => 'Rachmaniah', 'wakil_ketua' => 'M. Nur Sjahid', 'sekretaris_umum' => 'Dwi Sriyantini',
+                'sekretaris_1' => 'Gatot Suprabowo', 'bendahara_umum' => 'Dinuk Iswahyuningsih', 'bendahara_1' => 'Eko Yudiantoro Ilyas'
             ),
             'bidang' => array(
-                array(
-                    'nama' => 'Organisasi, Data dan Informasi',
-                    'anggota' => array('Heppy Septevin Gumilang', 'Edi Nanang Sofyan Hadi', 'Saiful Bahri')
-                ),
-                array(
-                    'nama' => 'Penggalian Dana',
-                    'anggota' => array('Yuni Irwanto', 'Ester Pramedina', 'Dyah Kusumaningrum')
-                ),
-                array(
-                    'nama' => 'Penyaluran Bantuan',
-                    'anggota' => array('Syamsul Hadi', 'Ria Cancerina', 'Sumariadi')
-                )
+                array('nama' => 'Organisasi, Data dan Informasi', 'anggota' => array('Heppy Septevin Gumilang', 'Edi Nanang Sofyan Hadi', 'Saiful Bahri')),
+                array('nama' => 'Penggalian Dana', 'anggota' => array('Yuni Irwanto', 'Ester Pramedina', 'Dyah Kusumaningrum')),
+                array('nama' => 'Penyaluran Bantuan', 'anggota' => array('Syamsul Hadi', 'Ria Cancerina', 'Sumariadi'))
             )
         );
         $this->load->view('home/layout', array('page_title' => 'Kepengurusan - YPAB Kabupaten Lumajang', 'content' => $this->load->view('home/kepengurusan', $data, true)));

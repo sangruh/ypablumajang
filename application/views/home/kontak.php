@@ -43,12 +43,18 @@
                     </div>
                 </div>
 
-                <!-- Map Placeholder -->
-                <div class="bg-gray-200 rounded-xl h-64 flex items-center justify-center">
-                    <div class="text-center text-gray-400">
-                        <svg class="h-12 w-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
-                        <p class="text-sm">Peta Lokasi</p>
-                    </div>
+                <!-- Map -->
+                <div class="rounded-xl overflow-hidden border border-gray-200 shadow-sm h-64">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3949.5!2d113.2244!3d-8.1356!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd695b30a0e7d01%3A0x0!2sAlun-Alun+Selatan+Lumajang!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid"
+                        width="100%"
+                        height="100%"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Peta Lokasi YPAB Lumajang"
+                    ></iframe>
                 </div>
             </div>
 

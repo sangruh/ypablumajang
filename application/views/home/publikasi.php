@@ -21,17 +21,17 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            <?php $no = 1; foreach ($publikasi as $item): ?>
+                            <?php $no = 1; foreach ($publikasi as $p): ?>
                             <tr class="hover:bg-gray-50 transition">
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><?php echo $no++; ?></td>
-                                <td class="px-6 py-4 text-sm font-medium text-gray-900"><?php echo $item['judul']; ?></td>
+                                <td class="px-6 py-4 text-sm font-medium text-gray-900"><?php echo $p->judul; ?></td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm">
-                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-primary-100 text-primary-700"><?php echo $item['jenis']; ?></span>
+                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-purple-100 text-purple-700"><?php echo strtoupper($p->kategori); ?></span>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><?php echo date('d F Y', strtotime($item['tanggal'])); ?></td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><?php echo date('d F Y', strtotime($p->created_at)); ?></td>
                                 <td class="px-6 py-4 whitespace-nowrap text-center text-sm">
-                                    <?php if ($item['file']): ?>
-                                    <a href="<?php echo base_url('assets/uploads/' . $item['file']); ?>" class="inline-flex items-center text-primary-700 hover:text-primary-800 font-medium" target="_blank">
+                                    <?php if ($p->file): ?>
+                                    <a href="<?php echo base_url('uploads/publikasi/' . $p->file); ?>" class="inline-flex items-center text-primary-700 hover:text-primary-800 font-medium" target="_blank">
                                         <svg class="h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                                         Unduh
                                     </a>

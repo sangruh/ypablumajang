@@ -143,7 +143,7 @@ if (!function_exists('role_name')) {
 /**
  * Status badge HTML generator
  * Usage: echo status_badge('approved');
- * 
+ *
  * @param string $status
  * @return string
  */
@@ -160,10 +160,33 @@ if (!function_exists('status_badge')) {
             'unanswered' => ['class' => 'status-warning', 'label' => 'Belum Dijawab'],
             'answered' => ['class' => 'status-success', 'label' => 'Sudah Dijawab'],
         ];
-        
+
         $status_lower = strtolower($status);
         $config = isset($statuses[$status_lower]) ? $statuses[$status_lower] : ['class' => '', 'label' => ucfirst($status)];
-        
+
         return '<span class="status-badge ' . $config['class'] . '">' . $config['label'] . '</span>';
+    }
+}
+
+/**
+ * Time ago format
+ * Usage: echo time_ago($timestamp);
+ *
+ * @param string $timestamp
+ * @return string
+ */
+if (!function_exists('time_ago')) {
+    function time_ago($timestamp)
+    {
+        $now = time();
+        $time = strtotime($timestamp);
+        $diff = $now - $time;
+
+        if ($diff < 60) return 'Baru saja';
+        if ($diff < 3600) return floor($diff / 60) . ' menit yang lalu';
+        if ($diff < 86400) return floor($diff / 3600) . ' jam yang lalu';
+        if ($diff < 2592000) return floor($diff / 86400) . ' hari yang lalu';
+        if ($diff < 31536000) return floor($diff / 2592000) . ' bulan yang lalu';
+        return floor($diff / 31536000) . ' tahun yang lalu';
     }
 }

@@ -4,7 +4,7 @@
         <div class="text-center mb-12">
             <h1 class="text-4xl font-bold text-gray-900">Kepengurusan</h1>
             <div class="w-20 h-1 bg-primary-600 mx-auto mt-4 rounded"></div>
-            <p class="text-gray-500 mt-4 max-w-2xl mx-auto">Susunan Pengurus Yayasan Peduli Anak Bangsa (YPAB) Kabupaten Lumajang Masa Bhakti 2025 – 2030</p>
+            <p class="text-gray-500 mt-4 max-w-3xl mx-auto whitespace-nowrap overflow-x-auto">Susunan Pengurus Yayasan Peduli Anak Bangsa (YPAB) Kabupaten Lumajang Masa Bhakti 2025 – 2030</p>
         </div>
 
         <!-- Pembina -->

@@ -107,51 +107,26 @@
 
             <!-- Penerima Manfaat -->
             <h3 class="text-lg font-bold text-gray-900 mb-4">Penerima Manfaat:</h3>
-            <div class="grid sm:grid-cols-2 gap-4">
-                <div class="flex items-center p-4 bg-gray-50 rounded-lg border border-gray-100">
-                    <div class="flex-shrink-0 bg-accent-100 rounded-full p-2">
-                        <svg class="h-5 w-5 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-                    </div>
-                    <div class="ml-3">
-                        <p class="font-semibold text-gray-900 text-sm">AUS-KM</p>
-                        <p class="text-xs text-gray-500">Anak Usia Sekolah Kurang Mampu</p>
-                    </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                <div class="flex items-center p-3 bg-gray-50 rounded-lg border border-gray-100">
+                    <div class="flex-shrink-0 bg-accent-100 rounded-full p-2"><svg class="h-5 w-5 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg></div>
+                    <div class="ml-3"><p class="font-semibold text-gray-900 text-sm">AUS-KM</p><p class="text-xs text-gray-500">Anak Usia Sekolah Kurang Mampu</p></div>
                 </div>
-                <div class="flex items-center p-4 bg-gray-50 rounded-lg border border-gray-100">
-                    <div class="flex-shrink-0 bg-primary-100 rounded-full p-2">
-                        <svg class="h-5 w-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
-                    </div>
-                    <div class="ml-3">
-                        <p class="font-semibold text-gray-900 text-sm">Mahasiswa Kurang Mampu</p>
-                        <p class="text-xs text-gray-500">Beasiswa & bantuan biaya pendidikan</p>
-                    </div>
+                <div class="flex items-center p-3 bg-gray-50 rounded-lg border border-gray-100">
+                    <div class="flex-shrink-0 bg-primary-100 rounded-full p-2"><svg class="h-5 w-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg></div>
+                    <div class="ml-3"><p class="font-semibold text-gray-900 text-sm">Mahasiswa Kurang Mampu</p><p class="text-xs text-gray-500">Beasiswa & bantuan biaya</p></div>
                 </div>
-                <div class="flex items-center p-4 bg-gray-50 rounded-lg border border-gray-100">
-                    <div class="flex-shrink-0 bg-warning-100 rounded-full p-2">
-                        <svg class="h-5 w-5 text-warning-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
-                    </div>
-                    <div class="ml-3">
-                        <p class="font-semibold text-gray-900 text-sm">Yatim Piatu</p>
-                        <p class="text-xs text-gray-500">Santunan & pendampingan</p>
-                    </div>
+                <div class="flex items-center p-3 bg-gray-50 rounded-lg border border-gray-100">
+                    <div class="flex-shrink-0 bg-warning-100 rounded-full p-2"><svg class="h-5 w-5 text-warning-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg></div>
+                    <div class="ml-3"><p class="font-semibold text-gray-900 text-sm">Yatim Piatu</p><p class="text-xs text-gray-500">Santunan & pendampingan</p></div>
                 </div>
-                <div class="flex items-center p-4 bg-gray-50 rounded-lg border border-gray-100">
-                    <div class="flex-shrink-0 bg-accent-100 rounded-full p-2">
-                        <svg class="h-5 w-5 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-                    </div>
-                    <div class="ml-3">
-                        <p class="font-semibold text-gray-900 text-sm">Fakir Miskin</p>
-                        <p class="text-xs text-gray-500">Bantuan sosial & pemberdayaan</p>
-                    </div>
+                <div class="flex items-center p-3 bg-gray-50 rounded-lg border border-gray-100">
+                    <div class="flex-shrink-0 bg-accent-100 rounded-full p-2"><svg class="h-5 w-5 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg></div>
+                    <div class="ml-3"><p class="font-semibold text-gray-900 text-sm">Fakir Miskin</p><p class="text-xs text-gray-500">Bantuan sosial & pemberdayaan</p></div>
                 </div>
-                <div class="flex items-center p-4 bg-gray-50 rounded-lg border border-gray-100 sm:col-span-2 sm:max-w-md sm:mx-auto">
-                    <div class="flex-shrink-0 bg-primary-100 rounded-full p-2">
-                        <svg class="h-5 w-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                    </div>
-                    <div class="ml-3">
-                        <p class="font-semibold text-gray-900 text-sm">Anak Terlantar</p>
-                        <p class="text-xs text-gray-500">Perlindungan & rehabilitasi</p>
-                    </div>
+                <div class="flex items-center p-3 bg-gray-50 rounded-lg border border-gray-100">
+                    <div class="flex-shrink-0 bg-primary-100 rounded-full p-2"><svg class="h-5 w-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+                    <div class="ml-3"><p class="font-semibold text-gray-900 text-sm">Anak Terlantar</p><p class="text-xs text-gray-500">Perlindungan & rehabilitasi</p></div>
                 </div>
             </div>
         </div>

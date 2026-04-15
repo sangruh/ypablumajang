@@ -1,5 +1,5 @@
 <!-- Hero Section -->
-<section class="relative bg-gradient-to-br from-primary-800 via-primary-700 to-primary-900 text-white overflow-hidden">
+<section class="relative bg-gradient-to-br from-primary-800 via-primary-700 to-primary-900 text-white overflow-hidden fade-in">
     <div class="absolute inset-0 opacity-10">
         <svg class="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
             <path d="M0 100 C 20 0 50 0 100 100 Z" fill="rgba(255,255,255,0.1)"/>
@@ -192,7 +192,7 @@
 </section>
 
 <!-- Program Preview Section -->
-<section class="py-16 bg-gray-50">
+<section class="py-16 bg-gray-50 fade-in">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
             <h2 class="text-3xl font-bold text-gray-900">Program Kami</h2>
@@ -236,6 +236,106 @@
                 Lihat Semua Program
                 <svg class="h-5 w-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
             </a>
+        </div>
+    </div>
+</section>
+
+<!-- Berita Terbaru -->
+<?php if (!empty($berita_terbaru)): ?>
+<section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900">Berita Terbaru</h2>
+            <div class="w-20 h-1 bg-primary-600 mx-auto mt-4 rounded"></div>
+            <p class="text-gray-500 mt-4 max-w-2xl mx-auto">Informasi dan kabar terbaru dari Yayasan Peduli Anak Bangsa Kabupaten Lumajang.</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            <?php foreach ($berita_terbaru as $b): ?>
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition">
+                    <?php if ($b->gambar): ?>
+                        <img src="<?php echo base_url('uploads/berita/' . $b->gambar); ?>" alt="<?php echo $b->judul; ?>" class="w-full h-48 object-cover">
+                    <?php else: ?>
+                        <div class="w-full h-48 bg-gray-100 flex items-center justify-center">
+                            <svg class="h-12 w-12 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                        </div>
+                    <?php endif; ?>
+                    <div class="p-6">
+                        <p class="text-xs text-gray-400 mb-2"><?php echo date('d F Y', strtotime($b->tanggal)); ?></p>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2 line-clamp-2"><?php echo $b->judul; ?></h3>
+                        <p class="text-gray-500 text-sm mb-4 line-clamp-3"><?php echo substr($b->konten, 0, 100); ?>...</p>
+                        <a href="<?php echo base_url('berita'); ?>" class="text-primary-700 font-medium text-sm hover:text-primary-800 transition">Baca Selengkapnya →</a>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+        <div class="text-center mt-10">
+            <a href="<?php echo base_url('berita'); ?>" class="inline-flex items-center text-primary-700 font-semibold hover:text-primary-800 transition">
+                Lihat Semua Berita
+                <svg class="h-5 w-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+        </div>
+    </div>
+</section>
+<?php endif; ?>
+
+<!-- Kegiatan Mendatang -->
+<?php if (!empty($kegiatan_mendatang)): ?>
+<section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900">Kegiatan Mendatang</h2>
+            <div class="w-20 h-1 bg-primary-600 mx-auto mt-4 rounded"></div>
+            <p class="text-gray-500 mt-4 max-w-2xl mx-auto">Jadwal kegiatan dan acara yang akan datang.</p>
+        </div>
+        <div class="space-y-4 max-w-3xl mx-auto">
+            <?php foreach ($kegiatan_mendatang as $k): ?>
+                <a href="<?php echo base_url('kegiatan/' . $k->id); ?>" class="block bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex items-center hover:shadow-md transition">
+                    <div class="flex-shrink-0 bg-primary-100 rounded-lg p-4 text-center min-w-[80px]">
+                        <p class="text-2xl font-bold text-primary-700"><?php echo date('d', strtotime($k->tanggal)); ?></p>
+                        <p class="text-xs text-primary-600"><?php echo date('M', strtotime($k->tanggal)); ?></p>
+                    </div>
+                    <div class="ml-5 flex-1">
+                        <h3 class="text-lg font-semibold text-gray-900"><?php echo $k->judul; ?></h3>
+                        <?php if ($k->lokasi): ?><p class="text-sm text-gray-500 mt-1">📍 <?php echo $k->lokasi; ?></p><?php endif; ?>
+                        <?php if ($k->waktu): ?><p class="text-sm text-gray-500">🕐 <?php echo $k->waktu; ?></p><?php endif; ?>
+                    </div>
+                    <?php if ($k->status): ?>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800"><?php echo ucfirst($k->status); ?></span>
+                    <?php endif; ?>
+                </a>
+            <?php endforeach; ?>
+        </div>
+        <div class="text-center mt-10">
+            <a href="<?php echo base_url('kegiatan'); ?>" class="inline-flex items-center text-primary-700 font-semibold hover:text-primary-800 transition">
+                Lihat Semua Kegiatan
+                <svg class="h-5 w-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+        </div>
+    </div>
+</section>
+<?php endif; ?>
+
+<!-- Mitra & Partner Section -->
+<section class="py-16 bg-white fade-in">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900">Mitra & Partner</h2>
+            <div class="w-20 h-1 bg-primary-600 mx-auto mt-4 rounded"></div>
+            <p class="text-gray-500 mt-4 max-w-2xl mx-auto">Bekerjasama dengan berbagai pihak untuk mewujudkan dampak yang lebih besar.</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 items-center opacity-60">
+            <div class="flex items-center justify-center p-6 grayscale hover:grayscale-0 transition">
+                <div class="text-center"><div class="text-4xl mb-2">🏛️</div><p class="text-sm font-semibold text-gray-700">Pemkab Lumajang</p></div>
+            </div>
+            <div class="flex items-center justify-center p-6 grayscale hover:grayscale-0 transition">
+                <div class="text-center"><div class="text-4xl mb-2">🎓</div><p class="text-sm font-semibold text-gray-700">Dinas Pendidikan</p></div>
+            </div>
+            <div class="flex items-center justify-center p-6 grayscale hover:grayscale-0 transition">
+                <div class="text-center"><div class="text-4xl mb-2">🏥</div><p class="text-sm font-semibold text-gray-700">Dinas Kesehatan</p></div>
+            </div>
+            <div class="flex items-center justify-center p-6 grayscale hover:grayscale-0 transition">
+                <div class="text-center"><div class="text-4xl mb-2">🤝</div><p class="text-sm font-semibold text-gray-700">Dinsos Lumajang</p></div>
+            </div>
         </div>
     </div>
 </section>

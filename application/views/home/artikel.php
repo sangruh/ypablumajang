@@ -8,21 +8,23 @@
         </div>
 
         <div class="space-y-6 max-w-4xl mx-auto">
-            <?php foreach ($artikel as $item): ?>
+            <?php foreach ($artikel as $a): ?>
             <article class="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition border border-gray-100">
                 <div class="flex items-center text-sm text-gray-400 mb-3 space-x-4">
                     <span class="flex items-center">
                         <svg class="h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-                        <?php echo $item['penulis']; ?>
+                        <?php echo $a->penulis; ?>
                     </span>
                     <span class="flex items-center">
                         <svg class="h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                        <?php echo date('d F Y', strtotime($item['tanggal'])); ?>
+                        <?php echo date('d F Y', strtotime($a->created_at)); ?>
                     </span>
                 </div>
-                <h3 class="text-xl font-semibold text-gray-900 mb-2"><?php echo $item['judul']; ?></h3>
-                <p class="text-gray-500 text-sm leading-relaxed mb-4"><?php echo $item['ringkasan']; ?></p>
-                <a href="#" class="inline-flex items-center text-primary-700 text-sm font-semibold hover:text-primary-800 transition">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                    <a href="<?php echo base_url('artikel/' . $a->id); ?>" class="hover:text-primary-700 transition"><?php echo $a->judul; ?></a>
+                </h3>
+                <p class="text-gray-500 text-sm leading-relaxed mb-4"><?php echo substr($a->konten, 0, 200); ?>...</p>
+                <a href="<?php echo base_url('artikel/' . $a->id); ?>" class="inline-flex items-center text-primary-700 text-sm font-semibold hover:text-primary-800 transition">
                     Baca selengkapnya
                     <svg class="h-4 w-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                 </a>
